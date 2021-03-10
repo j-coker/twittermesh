@@ -12,6 +12,7 @@ const DataVisualization = () => {
   
   const selectVizForDisplay = (radioIdx: number) => {
 
+    //Yeah, not ideal, but hey this is just a takehome assignment!
     if (radioIdx === 0) {
       return (<HashtagLikeRatioViz dataObj={dataObj} />);
     }

@@ -6,35 +6,17 @@ const HashtagQueryViz = (props: { dataObj: any }) => {
 
     const [queryStr, setQueryStr] = useState("");
 
+    //Probably a better way to handle this but was running into an issue where useEffect was updating state too late.
     const [, forceUpdate] = useReducer(x => x + 1, 0);
 
     const filteredHashtags = useRef<hashtagDataRaw[]>([]);
-    const hashtagDataArr = useRef<hashtagData[]>([]);
-
-    type hashtagDataRaw = {
-        id: Number,
-        name: String
-    }
-
-    type tweetDataRaw = {
-        id: Number,
-        user: Number,
-        text: String,
-        hashtags: Number[],
-        retweet_id: Number,
-        likes: Number[]
-    }
-
-    type hashtagData = {
-        hashtagName: String,
-        hashtagUses: number,
-        hashtagLikes: number
-    }
+    const hashtagDataArr = useRef<hashtagEngagementData[]>([]);
 
     useEffect(() => {
 
         hashtagDataArr.current = [];
 
+        //Filter our hashtag array based on the user's input
         const getFilteredHashtags = () => {
 
             if (queryStr.length < 1) {
@@ -47,36 +29,53 @@ const HashtagQueryViz = (props: { dataObj: any }) => {
             });
         }      
 
+        //Aggregate the number of likes and usages for each hashtag
         const composeHashtagDataArr = () => {
 
-            for (var hashtag in filteredHashtags.current)
-            {
-                var tagName: String = filteredHashtags.current[hashtag].name;
+            filteredHashtags.current.forEach((hashtag) => {
+
+                var tagName: String = hashtag.name;
 
                 var uses = 0;
                 var likes = 0;
                 
-                props.dataObj.tweets.forEach((x: tweetDataRaw) => {
-                    if (x.hashtags.includes(filteredHashtags.current[hashtag].id)) {
+                //For each tweet that includes the current hashtag, increment our usages and add the number of likes this tweet has
+                for (let index = 0; index < props.dataObj.tweets.length; index++) {
+                    if (props.dataObj.tweets[index].hashtags.includes(hashtag.id)) {
                         uses++;
-
-                        likes += x.likes.length;
+                        likes += props.dataObj.tweets[index].likes.length;
                     }
-                });
-
-                const newObj: hashtagData = {
-                    hashtagName: tagName,
-                    hashtagLikes: likes,
-                    hashtagUses: uses
                 }
 
-                hashtagDataArr.current.push(newObj);
-            }
+                //Sanitize the name a bit and check to see if we're already tracking this hashtag
+                var sanitizedName = hashtag.name.replace( /\s/g, '');
+                var existing = hashtagDataArr.current.find(x => x.hashtagName === sanitizedName);
 
+                if (existing) {
+
+                    existing.hashtagLikes += likes;
+                    existing.hashtagUses += uses;
+
+                    return;
+                } else {
+
+                    const newObj: hashtagEngagementData = {
+                        hashtagName: tagName,
+                        hashtagLikes: likes,
+                        hashtagUses: uses
+                    }
+
+                    hashtagDataArr.current.push(newObj);
+                }
+
+            });
+
+            //Sort the array in descending order
             hashtagDataArr.current.sort((a, b) => {
                 return b.hashtagLikes - a.hashtagLikes;
             })
 
+            //Don't want to explode the user's device so limit our results to the top 20
             if (hashtagDataArr.current.length > 20) {
                 hashtagDataArr.current = hashtagDataArr.current.slice(0, 20);
             }
@@ -87,10 +86,13 @@ const HashtagQueryViz = (props: { dataObj: any }) => {
         composeHashtagDataArr();
         forceUpdate();
 
-    }, [queryStr, props.dataObj.hashtags]);
+    }, [queryStr, props.dataObj.hashtags, props.dataObj.tweets]);
 
     return (
         <>
+            <p style={{marginBottom:'20px'}}>
+                This visualization shows the relationship between likes and usage count of hashtags that match the user's query string.
+            </p>
             <p className="searchInstructions">
                 Enter your hashtag query here!
             </p>
@@ -130,3 +132,14 @@ const HashtagQueryViz = (props: { dataObj: any }) => {
 }
 
 export default HashtagQueryViz;
+
+export type hashtagDataRaw = {
+    id: Number,
+    name: String
+}
+
+export type hashtagEngagementData = {
+    hashtagName: String,
+    hashtagUses: number,
+    hashtagLikes: number
+}

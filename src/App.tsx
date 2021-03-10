@@ -1,11 +1,6 @@
 import './App.css';
 import LogoHeader from './components/LogoHeader';
 import DataVisualization from './components/DataVisualization';
-import { CSSProperties } from 'react';
-
-const spacing: CSSProperties = {
-  margin: '20px'
-}
 
 const App = () => {
 
@@ -13,7 +8,7 @@ const App = () => {
     <div className="App">
       <div className="App-background" />
       <LogoHeader />
-      <div style={spacing}></div>
+      <div style={{margin:'20px'}}></div>
       <DataVisualization />
     </div>
   );
