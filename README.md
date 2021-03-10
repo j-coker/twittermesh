@@ -2,7 +2,7 @@
 
 A Twitter data visualization at the request of Remesh.ai.
 
-## How To use
+## How To Use
 
 0.) [Ensure Node/NPM is installed (project version 14.15.4 or greater)](https://nodejs.org/en/) (and git (just covering my bases))
 
