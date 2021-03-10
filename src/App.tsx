@@ -1,13 +1,20 @@
 import './App.css';
 import LogoHeader from './components/LogoHeader';
-import Visualization from './components/Visualization';
+import DataVisualization from './components/DataVisualization';
+import { CSSProperties } from 'react';
+
+const spacing: CSSProperties = {
+  margin: '20px'
+}
 
 const App = () => {
+
   return (
     <div className="App">
       <div className="App-background" />
       <LogoHeader />
-      <Visualization />
+      <div style={spacing}></div>
+      <DataVisualization />
     </div>
   );
 }
