@@ -10,6 +10,9 @@ const LogoHeader = () => {
             twittermesh.ai
           </p>
         </header>
+        <p style={{margin:'-5px', fontStyle:'italic'}}>
+          The premiere product for fake Tweet visualization.
+        </p>
       </section>
     );
 }

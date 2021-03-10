@@ -21,7 +21,7 @@ const DataVisualization = () => {
   
   return (
     <>
-      <p>
+      <p style={{fontSize:'22px'}}>
         Choose a visualization!
       </p>
       <div className="vizSelector">
