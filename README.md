@@ -4,7 +4,7 @@ A Twitter data visualization at the request of Remesh.ai.
 
 ## How To use
 
-0.) [Ensure Node/NPM is installed (project version 14.15.4 or greater)](https://nodejs.org/en/)
+0.) [Ensure Node/NPM is installed (project version 14.15.4 or greater)](https://nodejs.org/en/) (and git (just covering my bases))
 
 1.) Clone this project, either through direct download or `git clone https://github.com/j-coker/twittermesh.git`
 
