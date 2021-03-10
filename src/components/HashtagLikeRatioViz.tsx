@@ -1,9 +1,9 @@
 import React from "react";
 import { ResponsiveContainer, BarChart, CartesianGrid, XAxis, Label, YAxis, Tooltip, Bar } from "recharts";
 
-const HashtagLikeRatioViz = (dataObj: any) => {
+const HashtagLikeRatioViz = (props: {dataObj: any}) => {
 
-    var tweetData = dataObj.tweets.map((tweet: { hashtags: Number[], likes: Number[] }) => {
+    var tweetData = props.dataObj.tweets.map((tweet: { hashtags: Number[], likes: Number[] }) => {
 
         const newTweetObj = {
             hashtagCount: tweet.hashtags.length,
@@ -27,7 +27,6 @@ const HashtagLikeRatioViz = (dataObj: any) => {
     for (var key in tweetData) {
 
         if (!isNaN(Number.parseInt(key))) {
-            console.log(key);
 
             var avgLikes = tweetData[key].reduce((a: number, b: number) => {
                 return a + b;
@@ -42,14 +41,12 @@ const HashtagLikeRatioViz = (dataObj: any) => {
         }
     }
 
-    console.log(JSON.stringify(tweetData));
-
     return (
         <ResponsiveContainer width="100%" height="100%">
             <BarChart
                 width={500}
                 height={300}
-                data={dataObj}
+                data={aggTweetData}
                 margin={{
                     top: 5,
                     right: 50,

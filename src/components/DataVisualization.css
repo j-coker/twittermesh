@@ -1,32 +1,11 @@
-.searchQueryInput {
-    min-width: 400px;
-    min-height: 20px;
-    font-size: 22px;
-    padding: 10px;
-    margin-bottom: 40px;
-    margin-top: 20px;
-}
-
-.searchQuery {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-}
-
-.searchInstructions {
-    font-size: 32px;
-    margin: 0px;
-}
-
 .chartSection {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     min-height: 50vh;
     width: 100vw;
-    height: 40vh;
+    height: 60vh;
 }
 
 .vizContainer {
@@ -34,4 +13,12 @@
     justify-content: center;
     width: 100%;
     height: 100%;
+}
+
+.vizSelector {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 20px;
 }

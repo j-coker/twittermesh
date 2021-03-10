@@ -1,0 +1,20 @@
+.searchQueryInput {
+    min-width: 400px;
+    min-height: 20px;
+    font-size: 22px;
+    padding: 10px;
+    margin-bottom: 40px;
+    margin-top: 20px;
+}
+
+.searchQuery {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.searchInstructions {
+    font-size: 32px;
+    margin: 0px;
+}
