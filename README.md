@@ -1,6 +1,6 @@
 # Twittermesh.ai
 
-A Twitter data visualization at the request of Remesh.ai.
+A Twitter data visualization.
 
 ## How To Use
 
@@ -13,5 +13,3 @@ A Twitter data visualization at the request of Remesh.ai.
 3.) Run `npm install` to install dependencies
 
 4.) Run `npm start` to start the development server. This should open the app in a new browser tab. If not, simply navigate to `http://localhost:3000/` in your browser.
-
-5.) Bask in the transcendent glow of Cody's code, immediately affirmed that he would be a great addition to your band of fine software professionals.
